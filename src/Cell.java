@@ -1,11 +1,9 @@
-/**
- * Created by mridulkumar on 26/12/2016.
- */
+
 public class Cell {
 
     private int row;
     private int col;
-    Content element;
+    private Content element;
 
     public Cell(int i, int j) {
         this.row = i;
@@ -13,11 +11,26 @@ public class Cell {
         clear();
     }
 
-    private void clear() {
+    public void clear() {
         element = Content.EMPTY;
     }
 
     public Content getContent() {
         return element;
+    }
+
+    public void setContent(Content content) {
+        element = content;
+    }
+
+    public void drawCell() {
+        switch (element) {
+            case CROSS: System.out.print("X");
+                break;
+            case NOUGHT: System.out.print("O");
+                break;
+            case EMPTY: System.out.print(" ");
+                break;
+        }
     }
 }
