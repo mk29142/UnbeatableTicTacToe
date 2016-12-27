@@ -36,6 +36,10 @@ public class Grid {
         }
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
     public void drawGrid() {
         for(int i=0 ; i< ROWS ; i++) {
             for(int j=0 ; j< COlS ; j++) {
@@ -81,7 +85,7 @@ public class Grid {
             }
         }
 
-        //check diagnol
+        //check diagonal
         if((grid[0][0].getContent() == player &&
                 grid[1][1].getContent() == player &&
                 grid[2][2].getContent() == player) ||

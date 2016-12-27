@@ -37,7 +37,7 @@ public class GridTest {
     }
 
     @Test
-    public void hasWon() throws Exception {
+    public void hasWonTrueTest() throws Exception {
         grid.clearGrid();
         for(int i = 0; i < 3; i++) {
             grid.setCell(0, i, Content.NOUGHT);
@@ -45,6 +45,18 @@ public class GridTest {
 
         assertEquals(grid.hasWon(Content.NOUGHT), true);
         assertEquals(grid.hasWon(Content.CROSS), false);
+    }
+
+    @Test
+    public void hasWonFalseTest() {
+        grid.clearGrid();
+        for(int i = 0; i < 2; i++) {
+            grid.setCell(0, i, Content.NOUGHT);
+        }
+        grid.setCell(0,2, Content.CROSS);
+
+        assertEquals(grid.hasWon(Content.CROSS), false);
+
     }
 
 }
