@@ -70,9 +70,9 @@ public class GameEngine {
         }
     }
 
-//    private void playerMove(Content currPlayer, ComputerMinMax computer) {
-//
-//    }
+    private void playerMove(Content currPlayer, ComputerMinMax computer) {
+
+    }
 
     public void initEngine(int first) {
         grid.clearGrid();
