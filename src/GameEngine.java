@@ -14,10 +14,10 @@ public class GameEngine {
 
     public GameEngine() {
         grid = new Grid();
-        Computer computer1 = new ComputerFasterMinMax(grid);
+        Computer computer1 = new ComputerMinMax(grid);
         computer1.setSeed(Content.CROSS);
 
-        Computer computer2 = new ComputerMinMax(grid);
+        Computer computer2 = new ComputerFasterMinMax(grid);
         computer2.setSeed(Content.NOUGHT);
 
         int gameMode = -1;
