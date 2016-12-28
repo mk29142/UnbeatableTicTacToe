@@ -71,6 +71,50 @@ public class GameEngine {
     }
 
     private void playerMove(Content currPlayer, ComputerMinMax computer) {
+        boolean validInput = false;
+
+        do {
+            int row = -1;
+            int col = -1;
+
+            //computer's go
+            if(currPlayer == Content.CROSS) {
+                int [] computerMoves = computer.move();
+                row = computerMoves[0];
+                col = computerMoves[1];
+                System.out.println("");
+                System.out.println("Computer placed its " + currPlayer + " at "+ (row + 1) + " " + (col + 1));
+            } else if(currPlayer == Content.NOUGHT) {
+                //Humans go
+
+                System.out.println("");
+                System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
+                        + "The input should be (row[1-3] , column[1-3]) WITHOUT commas, and ONLY SPACES between two digits");
+                try
+                {
+                    row = in.nextInt()-1;
+                }
+                catch(Exception e)
+                {
+                    System.out.println("Invalid row input");
+                }
+                col = in.nextInt()-1;
+                System.out.println("");
+
+                if(row>=0 && row<3 && col>=0 && col<3 && grid.getContent(row, col) == Content.EMPTY)
+                {
+                    grid.setCell(row, col, currPlayer);
+                    validInput = true; // input good, exit loop
+                }
+                else
+                {
+                    System.out.println("");
+                    System.out.println("This move at (" + (row + 1) + "," + (col + 1)
+                            + ") is not valid. Try again...");
+                }
+
+            }
+        } while(!validInput);
 
     }
 

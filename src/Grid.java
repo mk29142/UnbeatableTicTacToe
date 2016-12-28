@@ -100,4 +100,7 @@ public class Grid {
         return flag;
     }
 
+    public Content getContent(int row, int col) {
+        return grid[row][col].getContent();
+    }
 }
