@@ -14,7 +14,7 @@ public abstract class Computer {
 
     public void setSeed(Content content) {
         this.computerSeed = content;
-        this.playerSeed = (content == Content.CROSS) ? Content.NOUGHT : Content.CROSS;
+        this.playerSeed = (content.equals(Content.CROSS)) ? Content.NOUGHT : Content.CROSS;
     }
 
 

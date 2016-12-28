@@ -41,8 +41,8 @@ public class Grid {
     }
 
     public void drawGrid() {
-        for(int i=0 ; i< ROWS ; i++) {
-            for(int j=0 ; j< COlS ; j++) {
+        for(int i=0 ; i < ROWS ; i++) {
+            for(int j=0 ; j < COlS ; j++) {
                 grid[i][j].drawCell();
                 if (j < COlS - 1) System.out.print("|");
             }
@@ -67,9 +67,9 @@ public class Grid {
 
         // check rows
         for(int i = 0; i < ROWS; i++) {
-            if(grid[i][0].getContent() == player &&
-                    grid[i][1].getContent() == player &&
-                    grid[i][2].getContent() == player) {
+            if(grid[i][0].getContent().equals(player) &&
+                    grid[i][1].getContent().equals(player) &&
+                    grid[i][2].getContent().equals(player)) {
                 flag = true;
                 break;
             }
@@ -77,25 +77,24 @@ public class Grid {
 
         //check cols
         for(int i = 0; i < COlS; i++) {
-            if (grid[0][i].getContent() == player &&
-                    grid[1][i].getContent() == player &&
-                    grid[2][i].getContent() == player) {
+            if (grid[0][i].getContent().equals(player) &&
+                    grid[1][i].getContent().equals(player) &&
+                    grid[2][i].getContent().equals(player)) {
                 flag = true;
                 break;
             }
         }
 
         //check diagonal
-        if((grid[0][0].getContent() == player &&
-                grid[1][1].getContent() == player &&
-                grid[2][2].getContent() == player) ||
-            (grid[0][2].getContent() == player &&
-                grid[1][1].getContent() == player &&
-                grid[2][0].getContent() == player)) {
+        if((grid[0][0].getContent().equals(player) &&
+                grid[1][1].getContent().equals(player) &&
+                grid[2][2].getContent().equals(player)) ||
+                (grid[0][2].getContent().equals(player) &&
+                        grid[1][1].getContent().equals(player) &&
+                        grid[2][0].getContent().equals(player))) {
 
             flag = true;
         }
-
 
         return flag;
     }

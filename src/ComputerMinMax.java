@@ -3,8 +3,6 @@ import java.util.List;
 
 public class ComputerMinMax extends Computer {
 
-    private Cell[][] grid;
-
     public ComputerMinMax(Grid grid) {
         super(grid);
     }
@@ -21,7 +19,7 @@ public class ComputerMinMax extends Computer {
     private int[] minimax(int depth, Content player) {
 
         List<int[]> nextMoves = generateMoves();
-        int bestScore = (player == computerSeed) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int bestScore = (player.equals(computerSeed)) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int currentScore;
         int bestRow = -1;
         int bestCol = -1;
@@ -33,7 +31,7 @@ public class ComputerMinMax extends Computer {
             for (int[] m : nextMoves) {
                 // Try this move for the current "player"
                 cells[m[0]][m[1]].setContent(player);
-                if (player == computerSeed) {  // computer is maximizing player
+                if (player.equals(computerSeed)) {  // computer is maximizing player
                     currentScore = minimax(depth - 1, playerSeed)[0];
                     if (currentScore > bestScore) {
                         bestScore = currentScore;
@@ -67,7 +65,7 @@ public class ComputerMinMax extends Computer {
         // Search for empty cells and add to the List
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
-                if (cells[row][col].getContent() == Content.EMPTY) {
+                if (cells[row][col].getContent().equals(Content.EMPTY)) {
                     moves.add(new int[] {row, col});
                 }
             }
@@ -99,14 +97,14 @@ public class ComputerMinMax extends Computer {
         int score = 0;
 
         // First cell
-        if (cells[row1][col1].getContent() == computerSeed) {
+        if (cells[row1][col1].getContent().equals(computerSeed)) {
             score = 1;
-        } else if (cells[row1][col1].getContent() == playerSeed) {
+        } else if (cells[row1][col1].getContent().equals(playerSeed)) {
             score = -1;
         }
 
         // Second cell
-        if (cells[row2][col2].getContent() == computerSeed) {
+        if (cells[row2][col2].getContent().equals(computerSeed)) {
             if (score == 1) {   // cell1 is computerSeed
                 score = 10;
             } else if (score == -1) {  // cell1 is playerSeed
@@ -114,7 +112,7 @@ public class ComputerMinMax extends Computer {
             } else {  // cell1 is empty
                 score = 1;
             }
-        } else if (cells[row2][col2].getContent() == playerSeed) {
+        } else if (cells[row2][col2].getContent().equals(playerSeed)) {
             if (score == -1) { // cell1 is computerSeed
                 score = -10;
             } else if (score == 1) { // cell1 is playerSeed
@@ -125,7 +123,7 @@ public class ComputerMinMax extends Computer {
         }
 
         // Third cell
-        if (cells[row3][col3].getContent() == computerSeed) {
+        if (cells[row3][col3].getContent().equals(computerSeed)) {
             if (score > 0) {  // cell1 and/or cell2 is mySeed
                 score *= 10;
             } else if (score < 0) {  // cell1 and/or cell2 is oppSeed
@@ -133,7 +131,7 @@ public class ComputerMinMax extends Computer {
             } else {  // cell1 and cell2 are empty
                 score = 1;
             }
-        } else if (cells[row3][col3].getContent() == playerSeed) {
+        } else if (cells[row3][col3].getContent().equals(playerSeed)) {
             if (score < 0) {  // cell1 and/or cell2 is oppSeed
                 score *= 10;
             } else if (score > 1) {  // cell1 and/or cell2 is mySeed
@@ -151,32 +149,32 @@ public class ComputerMinMax extends Computer {
         boolean flag = false;
 
         // check rows
-        for(int i = 0; i < ROWS; i++) {
-            if(grid[i][0].getContent() == player &&
-                    grid[i][1].getContent() == player &&
-                    grid[i][2].getContent() == player) {
+        for(int i = 0; i < 3; i++) {
+            if(cells[i][0].getContent().equals(player) &&
+                    cells[i][1].getContent().equals(player) &&
+                    cells[i][2].getContent().equals(player)) {
                 flag = true;
                 break;
             }
         }
 
         //check cols
-        for(int i = 0; i < COLS; i++) {
-            if (grid[0][i].getContent() == player &&
-                    grid[1][i].getContent() == player &&
-                    grid[2][i].getContent() == player) {
+        for(int i = 0; i < 3; i++) {
+            if (cells[0][i].getContent().equals(player) &&
+                    cells[1][i].getContent().equals(player) &&
+                    cells[2][i].getContent().equals(player)) {
                 flag = true;
                 break;
             }
         }
 
         //check diagonal
-        if((grid[0][0].getContent() == player &&
-                grid[1][1].getContent() == player &&
-                grid[2][2].getContent() == player) ||
-                (grid[0][2].getContent() == player &&
-                        grid[1][1].getContent() == player &&
-                        grid[2][0].getContent() == player)) {
+        if((cells[0][0].getContent().equals(player) &&
+                cells[1][1].getContent().equals(player) &&
+                cells[2][2].getContent().equals(player)) ||
+                (cells[0][2].getContent().equals(player) &&
+                        cells[1][1].getContent().equals(player) &&
+                        cells[2][0].getContent().equals(player))) {
 
             flag = true;
         }
