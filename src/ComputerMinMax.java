@@ -7,18 +7,23 @@ public class ComputerMinMax extends Computer {
         super(grid);
     }
 
-    /** Get next best move for computer. Returns {row, col} */
+    /**
+     * Get next best move for computer.
+     **/
     @Override
     int[] move() {
         int[] result = minimax(2, computerSeed); // depth, max turn
         return new int[] {result[1], result[2]};
     }
 
-    /** Recursive minimax at level of depth for either maximizing or minimizing player.
-            Returns {score, row, col}  */
+    /**
+     * Recursive minimax at level of depth for either maximizing or minimizing player.
+     **/
     private int[] minimax(int depth, Content player) {
 
         List<int[]> nextMoves = generateMoves();
+
+        // Computer is maximizing while the player will be minimizing
         int bestScore = (player.equals(computerSeed)) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int currentScore;
         int bestRow = -1;
@@ -31,14 +36,14 @@ public class ComputerMinMax extends Computer {
             for (int[] m : nextMoves) {
                 // Try this move for the current "player"
                 cells[m[0]][m[1]].setContent(player);
-                if (player.equals(computerSeed)) {  // computer is maximizing player
+                if (player.equals(computerSeed)) {  // computer is maximizing
                     currentScore = minimax(depth - 1, playerSeed)[0];
                     if (currentScore > bestScore) {
                         bestScore = currentScore;
                         bestRow = m[0];
                         bestCol = m[1];
                     }
-                } else {  // human/player is minimizing player
+                } else {  // human/player is minimizing
                     currentScore = minimax(depth - 1, playerSeed)[0];
                     if (currentScore < bestScore) {
                         bestScore = currentScore;
@@ -53,6 +58,9 @@ public class ComputerMinMax extends Computer {
         return new int[] {bestScore, bestRow, bestCol};
     }
 
+    /**
+     * Returns a list off all possible next moves
+     **/
     private List<int[]> generateMoves() {
 
         List<int[]> moves = new ArrayList<int[]>();
@@ -92,7 +100,8 @@ public class ComputerMinMax extends Computer {
     /** The heuristic evaluation function for the given line of 3 cells
      Return +100, +10, +1 for 3-, 2-, 1-in-a-line for computer.
      -100, -10, -1 for 3-, 2-, 1-in-a-line for opponent.
-     0 otherwise */
+     0 otherwise
+     **/
     private int evaluateLines(int row1, int col1, int row2, int col2, int row3, int col3) {
         int score = 0;
 
@@ -124,24 +133,23 @@ public class ComputerMinMax extends Computer {
 
         // Third cell
         if (cells[row3][col3].getContent().equals(computerSeed)) {
-            if (score > 0) {  // cell1 and/or cell2 is mySeed
+            if (score > 0) {  // cell1 and/or cell2 is computerSeed
                 score *= 10;
-            } else if (score < 0) {  // cell1 and/or cell2 is oppSeed
+            } else if (score < 0) {  // cell1 and/or cell2 is playerSeed
                 return 0;
             } else {  // cell1 and cell2 are empty
                 score = 1;
             }
         } else if (cells[row3][col3].getContent().equals(playerSeed)) {
-            if (score < 0) {  // cell1 and/or cell2 is oppSeed
+            if (score < 0) {  // cell1 and/or cell2 is playerSeed
                 score *= 10;
-            } else if (score > 1) {  // cell1 and/or cell2 is mySeed
+            } else if (score > 1) {  // cell1 and/or cell2 is computerSeed
                 return 0;
             } else {  // cell1 and cell2 are empty
                 score = -1;
             }
         }
         return score;
-
     }
 
     private boolean hasWon(Content player) {

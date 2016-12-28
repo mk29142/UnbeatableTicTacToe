@@ -12,11 +12,13 @@ public abstract class Computer {
         this.cells = grid.getGrid();
     }
 
+    /**
+     * Sets symbol for the computer and player
+     * */
     public void setSeed(Content content) {
         this.computerSeed = content;
         this.playerSeed = (content.equals(Content.CROSS)) ? Content.NOUGHT : Content.CROSS;
     }
-
 
     abstract int[] move();
 

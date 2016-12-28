@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/*
+* Combines all the pieces together and runs the game
+**/
+
 public class GameEngine {
 
     private Grid grid;
@@ -80,6 +84,7 @@ public class GameEngine {
 
         while (true) {
 
+            // Human vs Computer
             if(gameMode == 1) {
 
                 //computer's go
@@ -104,6 +109,7 @@ public class GameEngine {
                     System.out.println("");
                 }
 
+               // Human vs Human
             } else if(gameMode == 2) {
 
                 System.out.println("");
@@ -115,6 +121,7 @@ public class GameEngine {
 
                 System.out.println("");
 
+              // Computer vs Computer
             } else if(gameMode == 3) {
 
                 int [] computerMoves;
@@ -162,11 +169,13 @@ public class GameEngine {
 
     }
 
+    // Initilisation function for CvsC game mode
     private void computerVComputer() {
 
         currPlayer = Content.CROSS;
     }
 
+    // Initilisation function for HvsH game mode
     private void humanVHuman() {
 
         int firstPlayer = -1;
@@ -188,6 +197,7 @@ public class GameEngine {
         currPlayer = (firstPlayer == 0) ? Content.NOUGHT : Content.CROSS;
     }
 
+    // Initilisation function for HvsC game mode
     private void humanVComputer() {
 
         int firstPlayer = -1;

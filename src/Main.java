@@ -22,9 +22,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        State continueGame = null;
 
         int choice = 0;
+
         do {
             showMenu();
             try {
@@ -50,18 +50,15 @@ public class Main {
 
                 case 2:
                     GameEngine newGame = new GameEngine();
-                    continueGame = newGame.getState();
                     break;
 
                 case 3:
-                    break;
+                    return;
 
                 default:
                     System.out.println("Please enter a valid input");
                     choice = 0;
             }
-        }
-        while(choice >= 0 && choice < 4 || continueGame != null);
-
+        } while(choice >= 0 && choice < 4);
     }
 }
