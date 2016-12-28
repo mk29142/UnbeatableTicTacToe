@@ -15,9 +15,9 @@ public class Main {
         System.out.println(" Instructions:"
                 + "\n ======================"
                 + "\n This is a Tic-Tac-Toe game. There are 3 game modes, Human vs Human, " +
-                "Human vs Computer and Computer vs Computer." +
-                "When prompted for an input please enter the row and column number in that " +
-                "order WITHOUT commas and ONLY a space.\n");
+                "\n Human vs Computer and Computer vs Computer." +
+                "\n When prompted for an input please enter the row and column number in that " +
+                "\n order WITHOUT commas and ONLY a space.\n");
     }
 
     public static void main(String[] args) {
