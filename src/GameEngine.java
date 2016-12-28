@@ -14,10 +14,10 @@ public class GameEngine {
 
     public GameEngine() {
         grid = new Grid();
-        ComputerMinMax computer1 = new ComputerMinMax(grid);
+        Computer computer1 = new ComputerFasterMinMax(grid);
         computer1.setSeed(Content.CROSS);
 
-        ComputerMinMax computer2 = new ComputerMinMax(grid);
+        Computer computer2 = new ComputerMinMax(grid);
         computer2.setSeed(Content.NOUGHT);
 
         int gameMode = -1;
@@ -77,7 +77,7 @@ public class GameEngine {
         }
     }
 
-    private void playerMove(Content currPlayer, ComputerMinMax computer1, ComputerMinMax computer2, int gameMode) {
+    private void playerMove(Content currPlayer, Computer computer1, Computer computer2, int gameMode) {
 
         int row = -1;
         int col = -1;
