@@ -60,10 +60,9 @@ public abstract class Computer {
         return score;
     }
 
-    /** The heuristic evaluation function for the given line of 3 cells
-     Return +100, +10, +1 for 3-, 2-, 1-in-a-line for computer.
-     -100, -10, -1 for 3-, 2-, 1-in-a-line for opponent.
-     0 otherwise
+    /**
+     Evalution for given line of 3 cells, +100, + 10, +1 for a computer
+     -100, -10, -1 for a human or oponent.
      **/
     private int evaluateLines(int row1, int col1, int row2, int col2, int row3, int col3) {
         int score = 0;
