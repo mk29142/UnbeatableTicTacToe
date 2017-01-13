@@ -181,7 +181,6 @@ public class GameEngine {
                 computerVComputerInit();
                 break;
         }
-
     }
 
     // Initilisation function for CvsC game mode

@@ -39,15 +39,15 @@ public class ComputerFasterMinMax extends Computer {
         } else {
             for (int[] move : nextMoves) {
                 cells[move[0]][move[1]].setContent(playerSeed);
+                score = minimax(depth - 1, playerSeed, alpha, beta)[0];
+
                 if (player.equals(computerSeed)) {  // computer is maximizing
-                    score = minimax(depth - 1, playerSeed, alpha, beta)[0];
                     if (score > alpha) {
                         alpha = score;
                         bestRow = move[0];
                         bestCol = move[1];
                     }
                 } else {  // human is minimizing
-                    score = minimax(depth - 1, computerSeed, alpha, beta)[0];
                     if (score < beta) {
                         beta = score;
                         bestRow = move[0];
