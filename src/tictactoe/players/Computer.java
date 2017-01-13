@@ -1,3 +1,9 @@
+package tictactoe.players;
+
+import tictactoe.data.Cell;
+import tictactoe.data.Content;
+import tictactoe.data.Grid;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,6 +157,6 @@ public abstract class Computer {
         return flag;
     }
 
-    abstract int[] move();
+    public abstract int[] move();
 
 }

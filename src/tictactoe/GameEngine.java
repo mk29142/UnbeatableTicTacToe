@@ -1,4 +1,15 @@
+package tictactoe;
+
+import tictactoe.data.Content;
+import tictactoe.data.Grid;
+import tictactoe.data.State;
+import tictactoe.players.Computer;
+import tictactoe.players.ComputerMinMax;
+import tictactoe.utils.NumberValidator;
+import tictactoe.utils.Options;
+
 import java.util.Scanner;
+
 
 /*
 * Combines all the pieces together and runs the game
@@ -11,6 +22,7 @@ public class GameEngine {
     private Content currPlayer;
     private static Scanner in = new Scanner(System.in);
     private static NumberValidator numberValidator = new NumberValidator(in);
+    private static Options options = new Options();
 
     public GameEngine() {
         grid = new Grid();
@@ -25,10 +37,7 @@ public class GameEngine {
 
         int gameMode = -1;
 
-        System.out.println("Please choose gameMode");
-        System.out.println("Press 1 for Human Vs Computer " +
-                "\nPress 2 for Human Vs Human" +
-                "\nPress 3 for Computer Vs Computer");
+        options.showGameModes();
 
         numberValidator.clearStreamOfNonNumbers();
 
@@ -46,7 +55,7 @@ public class GameEngine {
             grid.drawGrid();
             updateGameState(currPlayer);
 
-            printWinningPlayer(currState);
+            options.printWinningPlayer(currState);
 
             currPlayer = switchPlayer();
         }
@@ -57,21 +66,6 @@ public class GameEngine {
 
     private Content switchPlayer() {
         return (currPlayer.equals(Content.CROSS)) ? Content.NOUGHT : Content.CROSS;
-    }
-
-    private void printWinningPlayer(State currState) {
-        if(this.currState.equals(State.CROSS_WON)) {
-            System.out.println("Player X Won the game");
-            System.out.println("=========================");
-        }
-        else if(this.currState.equals(State.NOUGHT_WON)) {
-            System.out.println("Player O Won the game");
-            System.out.println("=========================");
-        }
-        else if(this.currState.equals(State.DRAW)) {
-            System.out.println("Game Drawn. Bye!");
-            System.out.println("=========================");
-        }
     }
 
     private void updateGameState(Content currPlayer) {
@@ -92,25 +86,12 @@ public class GameEngine {
 
         while (true) {
 
-            // Human vs Computer
+            // Human vs tictactoe.players.Computer
             if(gameMode == 1) {
 
-                //computer's go
-                if(currPlayer.equals(Content.CROSS)) {
-
-                    int [] computerMoves = computer1.move();
-                    row = computerMoves[0];
-                    col = computerMoves[1];
-                    System.out.println("");
-                    System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
-
-                } else if(currPlayer.equals(Content.NOUGHT)) {
-                    //Humans go
-
-                    int[] res = getUserInput(currPlayer);
-                    row = res[0];
-                    col = res[1];
-                }
+                int[] moves = humanVsComputerMove(currPlayer, computer1);
+                row = moves[0];
+                col = moves[1];
 
                // Human vs Human
             } else if(gameMode == 2) {
@@ -119,10 +100,10 @@ public class GameEngine {
                 row = res[0];
                 col = res[1];
 
-              // Computer vs Computer
+              // tictactoe.players.Computer vs tictactoe.players.Computer
             } else if(gameMode == 3) {
 
-                int [] computerMoves;
+                int[] computerMoves;
 
                 if(currPlayer.equals(Content.CROSS)) {
                     computerMoves = computer1.move();
@@ -133,11 +114,11 @@ public class GameEngine {
                 row = computerMoves[0];
                 col = computerMoves[1];
                 System.out.println("");
-                System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
+                System.out.println("tictactoe.players.Computer placed its " + currPlayer + " at "+ row + " " + col);
 
             }
 
-            if(row >= 0 && row < 3 && col >= 0 && col < 3 && grid.getContent(row, col).equals(Content.EMPTY)) {
+            if(isWithinBounds(row, col) && isCellEmpty(row, col)) {
                 grid.setCell(row, col, currPlayer);
                 break;
             }
@@ -149,10 +130,20 @@ public class GameEngine {
         }
     }
 
+    private boolean isCellEmpty(int row, int col) {
+        return grid.getContent(row, col).equals(Content.EMPTY);
+    }
+
+    private boolean isWithinBounds(int row, int col) {
+        return row >= 0 && row < 3 && col >= 0 && col < 3;
+    }
+
     private int[] getUserInput(Content currPlayer) {
         System.out.println("");
         System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
                 + "The input should be (row[0-2] , column[0-2]) WITHOUT commas, and ONLY SPACES between two digits");
+
+        numberValidator.clearStreamOfNonNumbers();
 
         int row = in.nextInt();
         int col = in.nextInt();
@@ -169,26 +160,26 @@ public class GameEngine {
 
         switch (gameMode) {
             case 1:
-                humanVComputer();
+                humanVComputerInit();
                 break;
             case 2:
-                humanVHuman();
+                humanVHumanInit();
                 break;
             case 3:
-                computerVComputer();
+                computerVComputerInit();
                 break;
         }
 
     }
 
     // Initilisation function for CvsC game mode
-    private void computerVComputer() {
+    private void computerVComputerInit() {
 
         currPlayer = Content.CROSS;
     }
 
     // Initilisation function for HvsH game mode
-    private void humanVHuman() {
+    private void humanVHumanInit() {
 
         int firstPlayer = -1;
 
@@ -199,7 +190,7 @@ public class GameEngine {
     }
 
     // Initilisation function for HvsC game mode
-    private void humanVComputer() {
+    private void humanVComputerInit() {
 
         int firstPlayer = -1;
 
@@ -222,6 +213,24 @@ public class GameEngine {
         input = numberValidator.getNumberInRange(input, 0, 1);
 
         return input;
+    }
+
+    private int[] humanVsComputerMove(Content currPlayer, Computer computer) {
+
+        if(currPlayer.equals(Content.CROSS)) {
+
+            int [] computerMoves = computer.move();
+            System.out.println("");
+            System.out.println("tictactoe.players.Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
+            return computerMoves;
+
+        } else {
+
+            //Humans go
+            return  getUserInput(currPlayer);
+
+        }
+
     }
 
 

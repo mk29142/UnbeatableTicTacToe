@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package tictactoe.players;
+
+import tictactoe.data.Content;
+import tictactoe.data.Grid;
+
 import java.util.List;
 
 public class ComputerMinMax extends Computer {
@@ -23,7 +27,7 @@ public class ComputerMinMax extends Computer {
 
         List<int[]> nextMoves = generateMoves();
 
-        // Computer is maximizing while the player will be minimizing
+        // tictactoe.players.Computer is maximizing while the player will be minimizing
         int bestScore = (player.equals(computerSeed)) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int currentScore;
         int bestRow = -1;

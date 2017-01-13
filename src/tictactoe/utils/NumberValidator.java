@@ -1,3 +1,5 @@
+package tictactoe.utils;
+
 import java.util.Scanner;
 
 public class NumberValidator {

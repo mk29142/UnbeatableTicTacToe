@@ -1,3 +1,8 @@
+package tictactoe.players;
+
+import tictactoe.data.Content;
+import tictactoe.data.Grid;
+
 import java.util.List;
 
 /*

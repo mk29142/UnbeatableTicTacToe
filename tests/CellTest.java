@@ -1,5 +1,8 @@
 import org.junit.*;
-import static org.junit.Assert.*;
+import tictactoe.data.Cell;
+import tictactoe.data.Content;
+
+import static junit.framework.TestCase.assertEquals;
 
 public class CellTest {
 

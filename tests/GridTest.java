@@ -1,5 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
+import tictactoe.data.Content;
+import tictactoe.data.Grid;
 
 import static org.junit.Assert.*;
 

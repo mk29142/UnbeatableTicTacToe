@@ -1,3 +1,4 @@
+package tictactoe.data;
 
 public enum State {
 
