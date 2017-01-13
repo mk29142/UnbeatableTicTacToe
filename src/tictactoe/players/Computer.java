@@ -1,8 +1,6 @@
 package tictactoe.players;
 
-import tictactoe.data.Cell;
-import tictactoe.data.Content;
-import tictactoe.data.Grid;
+import tictactoe.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +13,10 @@ public abstract class Computer {
     protected Cell[][] cells;
     protected Content computerSeed;    // computer's symbol
     protected Content playerSeed;   // Players's symbol
+    protected Grid grid;
 
     public Computer(Grid grid) {
+        this.grid = grid;
         this.cells = grid.getGrid();
     }
 
@@ -36,14 +36,14 @@ public abstract class Computer {
         List<int[]> moves = new ArrayList<int[]>();
 
         // If gameover, i.e., no next move
-        if (hasWon(computerSeed) || hasWon(playerSeed)) {
+        if (grid.hasWon(computerSeed) || grid.hasWon(playerSeed)) {
             return moves;   // return empty list
         }
 
         // Search for empty cells and add to the List
         for (int row = 0; row < ROWS; ++row) {
             for (int col = 0; col < COLS; ++col) {
-                if (cells[row][col].getContent().equals(Content.EMPTY)) {
+                if (grid.getContent(row, col).equals(Content.EMPTY)) {
                     moves.add(new int[] {row, col});
                 }
             }
@@ -118,43 +118,6 @@ public abstract class Computer {
             }
         }
         return score;
-    }
-
-    private boolean hasWon(Content player) {
-
-        boolean flag = false;
-
-        // check rows
-        for(int i = 0; i < 3; i++) {
-            if(cells[i][0].getContent().equals(player) &&
-                    cells[i][1].getContent().equals(player) &&
-                    cells[i][2].getContent().equals(player)) {
-                flag = true;
-                break;
-            }
-        }
-
-        //check cols
-        for(int i = 0; i < 3; i++) {
-            if (cells[0][i].getContent().equals(player) &&
-                    cells[1][i].getContent().equals(player) &&
-                    cells[2][i].getContent().equals(player)) {
-                flag = true;
-                break;
-            }
-        }
-
-        //check diagonal
-        if((cells[0][0].getContent().equals(player) &&
-                cells[1][1].getContent().equals(player) &&
-                cells[2][2].getContent().equals(player)) ||
-                (cells[0][2].getContent().equals(player) &&
-                        cells[1][1].getContent().equals(player) &&
-                        cells[2][0].getContent().equals(player))) {
-
-            flag = true;
-        }
-        return flag;
     }
 
     public abstract int[] move();

@@ -7,6 +7,7 @@ import tictactoe.players.Computer;
 import tictactoe.players.ComputerMinMax;
 import tictactoe.utils.NumberValidator;
 import tictactoe.utils.Options;
+import tictactoe.utils.PositionTranslator;
 
 import java.util.Scanner;
 
@@ -23,6 +24,7 @@ public class GameEngine {
     private static Scanner in = new Scanner(System.in);
     private static NumberValidator numberValidator = new NumberValidator(in);
     private static Options options = new Options();
+    private static PositionTranslator positionTranslator = new PositionTranslator();
 
     public GameEngine() {
         grid = new Grid();
@@ -86,7 +88,7 @@ public class GameEngine {
 
         while (true) {
 
-            // Human vs tictactoe.players.Computer
+            // Human vs Computer
             if(gameMode == 1) {
 
                 int[] moves = humanVsComputerMove(currPlayer, computer1);
@@ -100,7 +102,7 @@ public class GameEngine {
                 row = res[0];
                 col = res[1];
 
-              // tictactoe.players.Computer vs tictactoe.players.Computer
+              // Computer vs Computer
             } else if(gameMode == 3) {
 
                 int[] computerMoves;
@@ -114,7 +116,7 @@ public class GameEngine {
                 row = computerMoves[0];
                 col = computerMoves[1];
                 System.out.println("");
-                System.out.println("tictactoe.players.Computer placed its " + currPlayer + " at "+ row + " " + col);
+                System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
 
             }
 
@@ -141,17 +143,17 @@ public class GameEngine {
     private int[] getUserInput(Content currPlayer) {
         System.out.println("");
         System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
-                + "The input should be (row[0-2] , column[0-2]) WITHOUT commas, and ONLY SPACES between two digits");
+                + "The input should be between 1 and 9 inclusive.");
 
         numberValidator.clearStreamOfNonNumbers();
 
-        int row = in.nextInt();
-        int col = in.nextInt();
+        int pos = in.nextInt();
 
+        pos = numberValidator.getNumberInRange(pos, 1, 9);
 
         System.out.println("");
 
-        return new int[]{row, col};
+        return positionTranslator.translate(pos);
     }
 
     private void initEngine(int gameMode) {
@@ -221,7 +223,7 @@ public class GameEngine {
 
             int [] computerMoves = computer.move();
             System.out.println("");
-            System.out.println("tictactoe.players.Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
+            System.out.println("Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
             return computerMoves;
 
         } else {
@@ -232,7 +234,6 @@ public class GameEngine {
         }
 
     }
-
 
     public State getState() {
         return currState;

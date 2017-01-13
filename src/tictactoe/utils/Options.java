@@ -17,16 +17,21 @@ public class Options {
         System.out.println(" Instructions:"
                 + "\n ======================"
                 + "\n This is a Tic-Tac-Toe game. There are 3 game modes, Human vs Human, " +
-                "\n Human vs tictactoe.players.Computer and tictactoe.players.Computer vs tictactoe.players.Computer." +
-                "\n When prompted for an input please enter the row and column number in that " +
-                "\n order WITHOUT commas and ONLY a space.\n");
+                "\n Human vs Computer and Computer vs Computer." +
+                "\n The cells are numbers from left to right start at 1, as shown below." +
+                "\n 1 | 2 | 3 " +
+                "\n ---------" +
+                "\n 4 | 5 | 6 " +
+                "\n ---------" +
+                "\n 7 | 8 | 9 " +
+                "\n When prompted pick a number between 1 and 9 inclusive.\n");
     }
 
     public void showGameModes() {
-        System.out.println("Please choose gameMode");
-        System.out.println("Press 1 for Human Vs tictactoe.players.Computer " +
+        System.out.println("Please choose game mode");
+        System.out.println("Press 1 for Human Vs Computer " +
                 "\nPress 2 for Human Vs Human" +
-                "\nPress 3 for tictactoe.players.Computer Vs tictactoe.players.Computer");
+                "\nPress 3 for Computer Vs Computer");
     }
 
     public void printWinningPlayer(State currState) {

@@ -15,7 +15,7 @@ public class ComputerMinMax extends Computer {
      * Get next best move for computer.
      **/
     @Override
-    int[] move() {
+    public int[] move() {
         int[] result = minimax(2, computerSeed); // depth, max turn
         return new int[]{result[1], result[2]};
     }

@@ -17,7 +17,7 @@ public class ComputerFasterMinMax extends Computer {
     }
 
     @Override
-    int[] move() {
+    public int[] move() {
         int[] result = minimax(2, computerSeed, Integer.MIN_VALUE, Integer.MAX_VALUE);
         // depth, max-turn, alpha, beta
         return new int[] {result[1], result[2]};   // row, col
