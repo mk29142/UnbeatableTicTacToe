@@ -74,50 +74,74 @@ public abstract class Computer {
         int score = 0;
 
         // First cell
-        if (cells[row1][col1].getContent().equals(computerSeed)) {
-            score = 1;
-        } else if (cells[row1][col1].getContent().equals(playerSeed)) {
-            score = -1;
-        }
+        score = computerFirstCell(cells[row1][col1], score);
 
         // Second cell
-        if (cells[row2][col2].getContent().equals(computerSeed)) {
+        score = computeSecondCell(cells[row2][col2], score);
+
+        // Third cell
+        score = computeThirdCell(cells[row3][col3], score);
+
+        return score;
+    }
+
+    private int computerFirstCell(Cell cell, int score) {
+        if (isComputer(cell)) {
+            score = 1;
+        } else if (isPlayer(cell)) {
+            score = -1;
+        }
+        return score;
+    }
+
+    private int computeSecondCell(Cell cell, int score) {
+        if (isComputer(cell)) {
             if (score == 1) {   // cell1 is computerSeed
                 score = 10;
             } else if (score == -1) {  // cell1 is playerSeed
-                return 0;
+                score = 0;
             } else {  // cell1 is empty
                 score = 1;
             }
-        } else if (cells[row2][col2].getContent().equals(playerSeed)) {
+        } else if (isPlayer(cell)) {
             if (score == -1) { // cell1 is computerSeed
                 score = -10;
             } else if (score == 1) { // cell1 is playerSeed
-                return 0;
+                score = 0;
             } else {  // cell1 is empty
                 score = -1;
             }
         }
+        return score;
+    }
 
-        // Third cell
-        if (cells[row3][col3].getContent().equals(computerSeed)) {
+    private int computeThirdCell(Cell cell, int score) {
+        if (isComputer(cell)) {
             if (score > 0) {  // cell1 and/or cell2 is computerSeed
                 score *= 10;
             } else if (score < 0) {  // cell1 and/or cell2 is playerSeed
-                return 0;
+                score = 0;
             } else {  // cell1 and cell2 are empty
                 score = 1;
             }
-        } else if (cells[row3][col3].getContent().equals(playerSeed)) {
+        } else if (isPlayer(cell)) {
             if (score < 0) {  // cell1 and/or cell2 is playerSeed
                 score *= 10;
             } else if (score > 1) {  // cell1 and/or cell2 is computerSeed
-                return 0;
+                score = 0;
             } else {  // cell1 and cell2 are empty
                 score = -1;
             }
         }
         return score;
+    }
+
+    private boolean isPlayer(Cell cell) {
+        return cell.getContent().equals(playerSeed);
+    }
+
+    private boolean isComputer(Cell cell) {
+        return cell.getContent().equals(computerSeed);
     }
 
     public abstract int[] move();

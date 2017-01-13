@@ -27,7 +27,7 @@ public class ComputerMinMax extends Computer {
 
         List<int[]> nextMoves = generateMoves();
 
-        // tictactoe.players.Computer is maximizing while the player will be minimizing
+        // Computer is maximizing while the player will be minimizing
         int bestScore = (player.equals(computerSeed)) ? Integer.MIN_VALUE : Integer.MAX_VALUE;
         int currentScore;
         int bestRow = -1;
