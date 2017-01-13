@@ -14,6 +14,9 @@ public class GameEngine {
 
     public GameEngine() {
         grid = new Grid();
+    }
+
+    public void play() {
         Computer computer1 = new ComputerMinMax(grid);
         computer1.setSeed(Content.CROSS);
 
@@ -30,10 +33,8 @@ public class GameEngine {
 
         while (gameMode < 1 || gameMode > 3) {
             System.out.println("Please enter either 1, 2, or 3");
-            while (!in.hasNextInt()) {
-                System.out.println("That's not a number!");
-                in.next();
-            }
+            checkInputForNumber();
+            gameMode = in.nextInt();
         }
 
         initEngine(gameMode);
@@ -99,27 +100,17 @@ public class GameEngine {
                 } else if(currPlayer.equals(Content.NOUGHT)) {
                     //Humans go
 
-                    System.out.println("");
-                    System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
-                            + "The input should be (row[0-2] , column[0-2]) WITHOUT commas, and ONLY SPACES between two digits");
-
-                    row = in.nextInt();
-                    col = in.nextInt();
-
-                    System.out.println("");
+                    int[] res = getUserInput(currPlayer);
+                    row = res[0];
+                    col = res[1];
                 }
 
                // Human vs Human
             } else if(gameMode == 2) {
 
-                System.out.println("");
-                System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
-                        + "The input should be (row[0-2] , column[0-2]) WITHOUT commas, and ONLY SPACES between two digits");
-
-                row = in.nextInt();
-                col = in.nextInt();
-
-                System.out.println("");
+                int[] res = getUserInput(currPlayer);
+                row = res[0];
+                col = res[1];
 
               // Computer vs Computer
             } else if(gameMode == 3) {
@@ -149,6 +140,20 @@ public class GameEngine {
                         + ") is not valid. Try again...");
             }
         }
+    }
+
+    private int[] getUserInput(Content currPlayer) {
+        System.out.println("");
+        System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
+                + "The input should be (row[0-2] , column[0-2]) WITHOUT commas, and ONLY SPACES between two digits");
+
+        int row = in.nextInt();
+        int col = in.nextInt();
+
+
+        System.out.println("");
+
+        return new int[]{row, col};
     }
 
     private void initEngine(int gameMode) {
@@ -181,18 +186,7 @@ public class GameEngine {
         int firstPlayer = -1;
 
         System.out.println("The symbol for player 2 is X and your symbol is O");
-        System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
-                "\nwant computer to play first");
-
-        firstPlayer = in.nextInt();
-
-        while (firstPlayer < 0 || firstPlayer > 1) {
-            System.out.println("Please enter either 1 or 0");
-            while (!in.hasNextInt()) {
-                System.out.println("That's not a number!");
-                in.next();
-            }
-        }
+        firstPlayer = selectWhoStarts();
 
         currPlayer = (firstPlayer == 0) ? Content.NOUGHT : Content.CROSS;
     }
@@ -203,21 +197,34 @@ public class GameEngine {
         int firstPlayer = -1;
 
         System.out.println("The symbol for computer is X and your symbol is O");
-        System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
-                "\nwant computer to play first");
-
-        firstPlayer = in.nextInt();
-
-        while (firstPlayer < 0 || firstPlayer > 1) {
-            System.out.println("Please enter either 1 or 0");
-            while (!in.hasNextInt()) {
-                System.out.println("That's not a number!");
-                in.next();
-            }
-        }
+        firstPlayer = selectWhoStarts();
 
         currPlayer = (firstPlayer == 0) ? Content.NOUGHT : Content.CROSS;
 
+    }
+
+    private int selectWhoStarts() {
+
+        System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
+                "\nwant computer to play first");
+
+        checkInputForNumber();
+
+        int input = in.nextInt();
+
+        while (input < 0 || input > 1) {
+            System.out.println("Please enter either 1 or 0");
+            checkInputForNumber();
+            input = in.nextInt();
+        }
+        return input;
+    }
+
+    private void checkInputForNumber() {
+        while (!in.hasNextInt()) {
+            System.out.println("That's not a number!");
+            in.next();
+        }
     }
 
     public State getState() {

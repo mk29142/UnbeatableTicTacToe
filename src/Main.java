@@ -50,6 +50,7 @@ public class Main {
 
                 case 2:
                     GameEngine newGame = new GameEngine();
+                    newGame.play();
                     break;
 
                 case 3:
