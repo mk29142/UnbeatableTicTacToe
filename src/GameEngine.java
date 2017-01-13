@@ -26,8 +26,9 @@ public class GameEngine {
         int gameMode = -1;
 
         System.out.println("Please choose gameMode");
-        System.out.println("Press 1 for Human Vs Computer, Press 2 for Human Vs Human" +
-                "\nand Press 3 for Computer Vs Computer.");
+        System.out.println("Press 1 for Human Vs Computer " +
+                "\nPress 2 for Human Vs Human" +
+                "\nPress 3 for Computer Vs Computer");
 
         gameMode = in.nextInt();
 
@@ -47,24 +48,32 @@ public class GameEngine {
             grid.drawGrid();
             updateGameState(currPlayer);
 
-            if(currState.equals(State.CROSS_WON)) {
-                System.out.println("Player X Won the game");
-                System.out.println("=========================");
-            }
-            else if(currState.equals(State.NOUGHT_WON)) {
-                System.out.println("Player O Won the game");
-                System.out.println("=========================");
-            }
-            else if(currState.equals(State.DRAW)) {
-                System.out.println("Game Drawn. Bye!");
-                System.out.println("=========================");
-            }
+            printWinningPlayer(currState);
 
-            currPlayer = (currPlayer.equals(Content.CROSS)) ? Content.NOUGHT : Content.CROSS;
+            currPlayer = switchPlayer();
         }
 
         // keep on playing until one player wins or the game is drawn
         while(currState.equals(State.PLAYING));
+    }
+
+    private Content switchPlayer() {
+        return (currPlayer.equals(Content.CROSS)) ? Content.NOUGHT : Content.CROSS;
+    }
+
+    private void printWinningPlayer(State currState) {
+        if(this.currState.equals(State.CROSS_WON)) {
+            System.out.println("Player X Won the game");
+            System.out.println("=========================");
+        }
+        else if(this.currState.equals(State.NOUGHT_WON)) {
+            System.out.println("Player O Won the game");
+            System.out.println("=========================");
+        }
+        else if(this.currState.equals(State.DRAW)) {
+            System.out.println("Game Drawn. Bye!");
+            System.out.println("=========================");
+        }
     }
 
     private void updateGameState(Content currPlayer) {
