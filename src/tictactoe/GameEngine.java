@@ -87,39 +87,27 @@ public class GameEngine {
         int col = -1;
 
         while (true) {
-
             // Human vs Computer
             if(gameMode == 1) {
-
-                int[] moves = humanVsComputerMove(currPlayer, computer1);
+                int[] moves = makeMove(currPlayer, computer1);
                 row = moves[0];
                 col = moves[1];
 
                // Human vs Human
             } else if(gameMode == 2) {
-
                 int[] res = getUserInput(currPlayer);
                 row = res[0];
                 col = res[1];
 
               // Computer vs Computer
             } else if(gameMode == 3) {
-
-                int[] computerMoves;
-
-                if(currPlayer.equals(Content.CROSS)) {
-                    computerMoves = computer1.move();
-                } else {
-                    computerMoves = computer2.move();
-                }
-
+                int[] computerMoves = makeMove(currPlayer, computer1, computer2);
                 row = computerMoves[0];
                 col = computerMoves[1];
                 System.out.println("");
                 System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
 
             }
-
             if(isWithinBounds(row, col) && isCellEmpty(row, col)) {
                 grid.setCell(row, col, currPlayer);
                 break;
@@ -129,6 +117,28 @@ public class GameEngine {
                 System.out.println("This move at (" + row + "," + col
                         + ") is not valid. Try again...");
             }
+        }
+    }
+
+    private int[] makeMove(Content currPlayer, Computer computer1, Computer computer2) {
+        int[] computerMoves;
+        if(currPlayer.equals(Content.CROSS)) {
+            computerMoves = computer1.move();
+        } else {
+            computerMoves = computer2.move();
+        }
+        return computerMoves;
+    }
+
+    private int[] makeMove(Content currPlayer, Computer computer) {
+        if(currPlayer.equals(Content.CROSS)) {
+            int [] computerMoves = computer.move();
+            System.out.println("");
+            System.out.println("Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
+            return computerMoves;
+        } else {
+            //Humans go
+            return  getUserInput(currPlayer);
         }
     }
 
@@ -215,24 +225,6 @@ public class GameEngine {
         input = numberValidator.getNumberInRange(input, 0, 1);
 
         return input;
-    }
-
-    private int[] humanVsComputerMove(Content currPlayer, Computer computer) {
-
-        if(currPlayer.equals(Content.CROSS)) {
-
-            int [] computerMoves = computer.move();
-            System.out.println("");
-            System.out.println("Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
-            return computerMoves;
-
-        } else {
-
-            //Humans go
-            return  getUserInput(currPlayer);
-
-        }
-
     }
 
     public State getState() {
