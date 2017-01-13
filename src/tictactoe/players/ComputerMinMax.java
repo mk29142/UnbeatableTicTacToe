@@ -2,7 +2,6 @@ package tictactoe.players;
 
 import tictactoe.data.Content;
 import tictactoe.data.Grid;
-
 import java.util.List;
 
 public class ComputerMinMax extends Computer {
@@ -40,15 +39,15 @@ public class ComputerMinMax extends Computer {
             for (int[] m : nextMoves) {
                 // Try this move for the current "player"
                 cells[m[0]][m[1]].setContent(player);
+                currentScore = minimax(depth - 1, playerSeed)[0];
+
                 if (player.equals(computerSeed)) {  // computer is maximizing
-                    currentScore = minimax(depth - 1, playerSeed)[0];
                     if (currentScore > bestScore) {
                         bestScore = currentScore;
                         bestRow = m[0];
                         bestCol = m[1];
                     }
                 } else {  // human/player is minimizing
-                    currentScore = minimax(depth - 1, playerSeed)[0];
                     if (currentScore < bestScore) {
                         bestScore = currentScore;
                         bestRow = m[0];

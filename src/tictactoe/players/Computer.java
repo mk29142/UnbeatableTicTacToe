@@ -116,6 +116,9 @@ public abstract class Computer {
     }
 
     private int computeThirdCell(Cell cell, int score) {
+        if(score == 0) {
+            return score;
+        }
         if (isComputer(cell)) {
             if (score > 0) {  // cell1 and/or cell2 is computerSeed
                 score *= 10;
