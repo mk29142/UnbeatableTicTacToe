@@ -12,7 +12,6 @@ import tictactoe.utils.PositionTranslator;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-
 /*
 * Combines all the pieces together and runs the game
 **/

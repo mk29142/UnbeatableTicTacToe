@@ -1,3 +1,5 @@
+package tictactoe.data;
+
 import org.junit.Before;
 import org.junit.Test;
 import tictactoe.data.Content;

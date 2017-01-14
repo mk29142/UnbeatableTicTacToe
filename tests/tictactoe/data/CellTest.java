@@ -1,3 +1,5 @@
+package tictactoe.data;
+
 import org.junit.*;
 import tictactoe.data.Cell;
 import tictactoe.data.Content;
