@@ -49,7 +49,7 @@ public class GameEngine {
         grid.drawGrid();
 
         do {
-            playerMove(currPlayer, computer1, computer2, gameMode);
+            move(currPlayer, computer1, computer2, gameMode);
             grid.drawGrid();
             updateGameState(currPlayer);
 
@@ -77,30 +77,15 @@ public class GameEngine {
         }
     }
 
-    private void playerMove(Content currPlayer, Computer computer1, Computer computer2, int gameMode) {
+    private void move(Content currPlayer, Computer computer1, Computer computer2, int gameMode) {
 
         int row = -1;
         int col = -1;
 
         while (true) {
-            // Human vs Computer
-            if(gameMode == 1) {
-                int[] moves = makeMove(currPlayer, computer1);
-                row = moves[0];
-                col = moves[1];
-               // Human vs Human
-            } else if(gameMode == 2) {
-                int[] res = getUserInput(currPlayer);
-                row = res[0];
-                col = res[1];
-              // Computer vs Computer
-            } else if(gameMode == 3) {
-                delayExecution();
-                int[] computerMoves = makeMove(currPlayer, computer1, computer2);
-                row = computerMoves[0];
-                col = computerMoves[1];
-                outputOptions.printMadeMove(currPlayer, row, col);
-            }
+            int[] position = gameModeBasedMove(currPlayer, computer1, computer2, gameMode);
+            row = position[0];
+            col = position[1];
             if(isWithinBounds(row, col) && isCellEmpty(row, col)) {
                 grid.setCell(row, col, currPlayer);
                 break;
@@ -108,6 +93,22 @@ public class GameEngine {
             else {
                 outputOptions.invalidMove(row, col);
             }
+        }
+    }
+
+    private int[] gameModeBasedMove(Content currPlayer, Computer computer1, Computer computer2, int gameMode) {
+        if(gameMode == 1) {
+            return makeMove(currPlayer, computer1);
+            // Human vs Human
+        } else if(gameMode == 2) {
+            return getUserInput(currPlayer);
+            // Computer vs Computer
+        } else {
+            delayExecution();
+            int[] computerMoves = makeMove(currPlayer, computer1, computer2);
+            outputOptions.printMadeMove(currPlayer, computerMoves[0], computerMoves[1]);
+            return computerMoves;
+
         }
     }
 
