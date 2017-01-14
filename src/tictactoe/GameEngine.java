@@ -41,15 +41,10 @@ public class GameEngine {
         int gameMode = -1;
 
         outputOptions.showGameModes();
-
-        inputValidator.clearStreamOfNonNumbers();
-
+        inputValidator.clearStreamOfNonIntegers();
         gameMode = in.nextInt();
-
         gameMode = inputValidator.getNumberInRange(gameMode, 1, 3);
-
         initEngine(gameMode);
-
         System.out.println("Game grid before start");
         grid.drawGrid();
 
@@ -93,13 +88,11 @@ public class GameEngine {
                 int[] moves = makeMove(currPlayer, computer1);
                 row = moves[0];
                 col = moves[1];
-
                // Human vs Human
             } else if(gameMode == 2) {
                 int[] res = getUserInput(currPlayer);
                 row = res[0];
                 col = res[1];
-
               // Computer vs Computer
             } else if(gameMode == 3) {
                 delayExecution();
@@ -157,7 +150,7 @@ public class GameEngine {
 
     private int[] getUserInput(Content currPlayer) {
         outputOptions.printUserInputRequest(currPlayer);
-        inputValidator.clearStreamOfNonNumbers();
+        inputValidator.clearStreamOfNonIntegers();
         int pos = in.nextInt();
         pos = inputValidator.getNumberInRange(pos, 1, 9);
         System.out.println("");
@@ -204,7 +197,7 @@ public class GameEngine {
 
     private int selectWhoStarts() {
         outputOptions.askWhoStarts();
-        inputValidator.clearStreamOfNonNumbers();
+        inputValidator.clearStreamOfNonIntegers();
         int input = in.nextInt();
         input = inputValidator.getNumberInRange(input, 0, 1);
         return input;

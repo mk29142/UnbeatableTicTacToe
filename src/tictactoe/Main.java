@@ -17,7 +17,7 @@ public class Main {
 
         while (true) {
             outputOptions.showMenu();
-            inputValidator.clearStreamOfNonNumbers();
+            inputValidator.clearStreamOfNonIntegers();
 
             choice = input.nextInt();
 
