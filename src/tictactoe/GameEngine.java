@@ -56,7 +56,6 @@ public class GameEngine {
 
             currPlayer = switchPlayer();
         }
-
         // keep on playing until one player wins or the game is drawn
         while(currState.equals(State.PLAYING));
     }
