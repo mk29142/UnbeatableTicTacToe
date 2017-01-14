@@ -21,6 +21,6 @@ The simplest way to run this is to use an IDE:
 To run on command line:
 
 - cd into tictactoe folder
-- run: *javac -cp .. *.java** to compile it
+- run: *javac -cp .. *.java* to compile it
 - cd out of tictactoe so that you are in the src directory.
 - run *java tictactoe.Main*
