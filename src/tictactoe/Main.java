@@ -1,7 +1,7 @@
 package tictactoe;
 
-import tictactoe.utils.NumberValidator;
-import tictactoe.utils.Options;
+import tictactoe.utils.InputValidator;
+import tictactoe.utils.OutputOptions;
 
 import java.util.Scanner;
 
@@ -9,24 +9,24 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        NumberValidator numberValidator = new NumberValidator(input);
+        InputValidator inputValidator = new InputValidator(input);
         GameEngine newGame = new GameEngine();
-        Options options = new Options();
+        OutputOptions outputOptions = new OutputOptions();
 
         int choice = 0;
 
         while (true) {
-            options.showMenu();
-            numberValidator.clearStreamOfNonNumbers();
+            outputOptions.showMenu();
+            inputValidator.clearStreamOfNonNumbers();
 
             choice = input.nextInt();
 
-            choice = numberValidator.getNumberInRange(choice, 0, 4);
+            choice = inputValidator.getNumberInRange(choice, 0, 4);
 
             switch(choice) {
 
                 case 1:
-                    options.showInstructions();
+                    outputOptions.showInstructions();
                     break;
 
                 case 2:

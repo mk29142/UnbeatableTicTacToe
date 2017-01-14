@@ -2,11 +2,11 @@ package tictactoe.utils;
 
 import java.util.Scanner;
 
-public class NumberValidator {
+public class InputValidator {
 
     private final Scanner in;
 
-    public NumberValidator(Scanner in) {
+    public InputValidator(Scanner in) {
         this.in = in;
     }
 

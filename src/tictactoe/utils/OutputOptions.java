@@ -2,7 +2,7 @@ package tictactoe.utils;
 
 import tictactoe.data.State;
 
-public class Options {
+public class OutputOptions {
 
     public void showMenu() {
         System.out.println("MENU:");

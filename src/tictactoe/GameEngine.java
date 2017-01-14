@@ -5,8 +5,8 @@ import tictactoe.data.Grid;
 import tictactoe.data.State;
 import tictactoe.players.Computer;
 import tictactoe.players.ComputerMinMax;
-import tictactoe.utils.NumberValidator;
-import tictactoe.utils.Options;
+import tictactoe.utils.InputValidator;
+import tictactoe.utils.OutputOptions;
 import tictactoe.utils.PositionTranslator;
 
 import java.util.Scanner;
@@ -22,8 +22,8 @@ public class GameEngine {
     private State currState;
     private Content currPlayer;
     private static Scanner in = new Scanner(System.in);
-    private static NumberValidator numberValidator = new NumberValidator(in);
-    private static Options options = new Options();
+    private static InputValidator inputValidator = new InputValidator(in);
+    private static OutputOptions outputOptions = new OutputOptions();
     private static PositionTranslator positionTranslator = new PositionTranslator();
 
     public GameEngine() {
@@ -39,13 +39,13 @@ public class GameEngine {
 
         int gameMode = -1;
 
-        options.showGameModes();
+        outputOptions.showGameModes();
 
-        numberValidator.clearStreamOfNonNumbers();
+        inputValidator.clearStreamOfNonNumbers();
 
         gameMode = in.nextInt();
 
-        gameMode = numberValidator.getNumberInRange(gameMode, 1, 3);
+        gameMode = inputValidator.getNumberInRange(gameMode, 1, 3);
 
         initEngine(gameMode);
 
@@ -57,7 +57,7 @@ public class GameEngine {
             grid.drawGrid();
             updateGameState(currPlayer);
 
-            options.printWinningPlayer(currState);
+            outputOptions.printWinningPlayer(currState);
 
             currPlayer = switchPlayer();
         }
@@ -155,11 +155,11 @@ public class GameEngine {
         System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
                 + "The input should be between 1 and 9 inclusive.");
 
-        numberValidator.clearStreamOfNonNumbers();
+        inputValidator.clearStreamOfNonNumbers();
 
         int pos = in.nextInt();
 
-        pos = numberValidator.getNumberInRange(pos, 1, 9);
+        pos = inputValidator.getNumberInRange(pos, 1, 9);
 
         System.out.println("");
 
@@ -217,11 +217,11 @@ public class GameEngine {
         System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
                 "\nwant computer to play first");
 
-        numberValidator.clearStreamOfNonNumbers();
+        inputValidator.clearStreamOfNonNumbers();
 
         int input = in.nextInt();
 
-        input = numberValidator.getNumberInRange(input, 0, 1);
+        input = inputValidator.getNumberInRange(input, 0, 1);
 
         return input;
     }
