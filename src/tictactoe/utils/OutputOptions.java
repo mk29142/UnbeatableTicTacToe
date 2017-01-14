@@ -52,7 +52,7 @@ public class OutputOptions {
 
     public void printUserInputRequest(Content currPlayer) {
         System.out.println("");
-        System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
+        System.out.println("Please enter the location where you want to place your " + currPlayer + "\n"
                 + "The input should be between 1 and 9 inclusive.");
     }
 
