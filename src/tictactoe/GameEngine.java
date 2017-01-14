@@ -10,6 +10,7 @@ import tictactoe.utils.OutputOptions;
 import tictactoe.utils.PositionTranslator;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 /*
@@ -101,22 +102,27 @@ public class GameEngine {
 
               // Computer vs Computer
             } else if(gameMode == 3) {
+                delayExecution();
                 int[] computerMoves = makeMove(currPlayer, computer1, computer2);
                 row = computerMoves[0];
                 col = computerMoves[1];
-                System.out.println("");
-                System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
-
+                outputOptions.printMadeMove(currPlayer, row, col);
             }
             if(isWithinBounds(row, col) && isCellEmpty(row, col)) {
                 grid.setCell(row, col, currPlayer);
                 break;
             }
             else {
-                System.out.println("");
-                System.out.println("This move at (" + row + "," + col
-                        + ") is not valid. Try again...");
+                outputOptions.invalidMove(row, col);
             }
+        }
+    }
+
+    private void delayExecution() {
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -133,8 +139,7 @@ public class GameEngine {
     private int[] makeMove(Content currPlayer, Computer computer) {
         if(currPlayer.equals(Content.CROSS)) {
             int [] computerMoves = computer.move();
-            System.out.println("");
-            System.out.println("Computer placed its " + currPlayer + " at "+ computerMoves[0] + " " + computerMoves[1]);
+            outputOptions.printMadeMove(currPlayer, computerMoves[0], computerMoves[1]);
             return computerMoves;
         } else {
             //Humans go
@@ -151,18 +156,11 @@ public class GameEngine {
     }
 
     private int[] getUserInput(Content currPlayer) {
-        System.out.println("");
-        System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
-                + "The input should be between 1 and 9 inclusive.");
-
+        outputOptions.printUserInputRequest(currPlayer);
         inputValidator.clearStreamOfNonNumbers();
-
         int pos = in.nextInt();
-
         pos = inputValidator.getNumberInRange(pos, 1, 9);
-
         System.out.println("");
-
         return positionTranslator.translate(pos);
     }
 
@@ -185,44 +183,30 @@ public class GameEngine {
 
     // Initilisation function for CvsC game mode
     private void computerVComputerInit() {
-
         currPlayer = Content.CROSS;
     }
 
     // Initilisation function for HvsH game mode
     private void humanVHumanInit() {
-
         int firstPlayer = -1;
-
-        System.out.println("\nThe symbol for player 2 is X and your symbol is O\n");
+        outputOptions.printHumanVsHumanLegend();
         firstPlayer = selectWhoStarts();
-
         currPlayer = (firstPlayer == 0) ? Content.NOUGHT : Content.CROSS;
     }
 
     // Initilisation function for HvsC game mode
     private void humanVComputerInit() {
-
         int firstPlayer = -1;
-
-        System.out.println("\nThe symbol for computer is X and your symbol is O\n");
+        outputOptions.printHumanVsComputerLegend();
         firstPlayer = selectWhoStarts();
-
         currPlayer = (firstPlayer == 0) ? Content.NOUGHT : Content.CROSS;
-
     }
 
     private int selectWhoStarts() {
-
-        System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
-                "\nwant computer to play first");
-
+        outputOptions.askWhoStarts();
         inputValidator.clearStreamOfNonNumbers();
-
         int input = in.nextInt();
-
         input = inputValidator.getNumberInRange(input, 0, 1);
-
         return input;
     }
 

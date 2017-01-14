@@ -1,5 +1,6 @@
 package tictactoe.utils;
 
+import tictactoe.data.Content;
 import tictactoe.data.State;
 
 public class OutputOptions {
@@ -47,5 +48,35 @@ public class OutputOptions {
             System.out.println("Game Drawn. Bye!");
             System.out.println("=========================");
         }
+    }
+
+    public void printUserInputRequest(Content currPlayer) {
+        System.out.println("");
+        System.out.println("Player O please enter the location where you want to place your " + currPlayer + "\n"
+                + "The input should be between 1 and 9 inclusive.");
+    }
+
+    public void printHumanVsHumanLegend() {
+        System.out.println("\nThe symbol for player 2 is X and your symbol is O\n");
+    }
+
+    public void printHumanVsComputerLegend() {
+        System.out.println("\nThe symbol for computer is X and your symbol is O\n");
+    }
+
+    public void askWhoStarts() {
+        System.out.println("Press 0(zero) if you want to play first and 1(one) if you " +
+                "\nwant computer to play first");
+    }
+
+    public void invalidMove(int row, int col) {
+        System.out.println("");
+        System.out.println("This move at (" + row + "," + col
+                + ") is not valid. Try again...");
+    }
+
+    public void printMadeMove(Content currPlayer, int row, int col) {
+        System.out.println("");
+        System.out.println("Computer placed its " + currPlayer + " at "+ row + " " + col);
     }
 }
