@@ -5,7 +5,7 @@ import tictactoe.data.Grid;
 import tictactoe.data.State;
 import tictactoe.players.Computer;
 import tictactoe.players.ComputerMinMax;
-import tictactoe.utils.InputValidator;
+import tictactoe.utils.InputNumberValidator;
 import tictactoe.utils.OutputOptions;
 import tictactoe.utils.PositionTranslator;
 
@@ -22,7 +22,7 @@ public class GameEngine {
     private State currState;
     private Content currPlayer;
     private static Scanner in = new Scanner(System.in);
-    private static InputValidator inputValidator = new InputValidator(in);
+    private static InputNumberValidator inputNumberValidator = new InputNumberValidator(in);
     private static OutputOptions outputOptions = new OutputOptions();
     private static PositionTranslator positionTranslator = new PositionTranslator();
 
@@ -40,9 +40,9 @@ public class GameEngine {
         int gameMode = -1;
 
         outputOptions.showGameModes();
-        inputValidator.clearStreamOfNonIntegers();
+        inputNumberValidator.clearStreamOfNonIntegers();
         gameMode = in.nextInt();
-        gameMode = inputValidator.getNumberInRange(gameMode, 1, 3);
+        gameMode = inputNumberValidator.getNumberInRange(gameMode, 1, 3);
         initEngine(gameMode);
         System.out.println("Game grid before start");
         grid.drawGrid();
@@ -150,9 +150,9 @@ public class GameEngine {
 
     private int[] getUserInput(Content currPlayer) {
         outputOptions.printUserInputRequest(currPlayer);
-        inputValidator.clearStreamOfNonIntegers();
+        inputNumberValidator.clearStreamOfNonIntegers();
         int pos = in.nextInt();
-        pos = inputValidator.getNumberInRange(pos, 1, 9);
+        pos = inputNumberValidator.getNumberInRange(pos, 1, 9);
         System.out.println("");
         return positionTranslator.translate(pos);
     }
@@ -197,9 +197,9 @@ public class GameEngine {
 
     private int selectWhoStarts() {
         outputOptions.askWhoStarts();
-        inputValidator.clearStreamOfNonIntegers();
+        inputNumberValidator.clearStreamOfNonIntegers();
         int input = in.nextInt();
-        input = inputValidator.getNumberInRange(input, 0, 1);
+        input = inputNumberValidator.getNumberInRange(input, 0, 1);
         return input;
     }
 

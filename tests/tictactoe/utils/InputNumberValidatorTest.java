@@ -10,11 +10,11 @@ import java.util.Scanner;
 
 import static org.junit.Assert.*;
 
-public class InputValidatorTest {
+public class InputNumberValidatorTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private ByteArrayInputStream in;
-    private InputValidator validator;
+    private InputNumberValidator validator;
     private Scanner scanner;
 
 
@@ -23,7 +23,7 @@ public class InputValidatorTest {
         in = new ByteArrayInputStream("a b c d 4 3 6".getBytes());
         System.setIn(in);
         scanner = new Scanner(in);
-        validator = new InputValidator(scanner);
+        validator = new InputNumberValidator(scanner);
         System.setOut(new PrintStream(outContent));
     }
 
@@ -57,7 +57,7 @@ public class InputValidatorTest {
         in = new ByteArrayInputStream("4 3 6".getBytes());
         System.setIn(in);
         scanner = new Scanner(in);
-        validator = new InputValidator(scanner);
+        validator = new InputNumberValidator(scanner);
 
         String message = "";
         for(int i = 0; i < 2; i++) {
