@@ -13,19 +13,17 @@ When Computer vs Computer option is chosen then, one computer
 will run the minmax algorithm while the other will run a slight
 variation where it uses alpha-beta pruning.
 
+Instructions to run:
 
-The simplest way to run this is to use an IDE:
+Make sure your java version is version 7 and run the following command.
 
-- just open the project and run Main.java
+- java -cp target/UnbeatableTicTacToe-1.0-SNAPSHOT.jar tictactoe.Main
 
-To run on command line:
+To run the tests:
 
-- cd into tictactoe folder
-- run: *javac -cp .. *.java*
-- cd out of tictactoe so that you are in the src directory.
-- run *java tictactoe.Main*
+If you have maven already install:  
+- go into the folder where pom.xml and enter "mvn package"
 
-To run the tests in IDE:
-
-- Make sure junit4 is in the classpath
-- Then just right click on test folder and select run tests
+Otherwise:
+- open the project in the IDE
+- Right click on tests folder and select run Tests in test.
