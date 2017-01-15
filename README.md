@@ -24,3 +24,8 @@ To run on command line:
 - run: *javac -cp .. *.java*
 - cd out of tictactoe so that you are in the src directory.
 - run *java tictactoe.Main*
+
+To run the tests in IDE:
+
+- Make sure junit4 is in the classpath
+- Then just right click on test folder and select run tests
