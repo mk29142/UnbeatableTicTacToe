@@ -22,8 +22,8 @@ Make sure your java version is version 7 and run the following command.
 To run the tests:
 
 If you have maven already install:  
-- go into the folder where pom.xml and enter "mvn package"
+- go into the folder where pom.xml is and enter (without the quotes) "mvn package"
 
 Otherwise:
-- open the project in the IDE
-- Right click on tests folder and select run Tests in test.
+- open the project in a IDE
+- Right click on tests folder and select "run Tests in test".
