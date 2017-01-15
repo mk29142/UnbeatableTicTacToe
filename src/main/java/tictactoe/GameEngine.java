@@ -33,7 +33,6 @@ public class GameEngine {
         computer2.setSeed(Content.NOUGHT);
 
         int gameMode = -1;
-
         outputOptions.showGameModes();
         inputNumberValidator.clearStreamOfNonIntegers();
         gameMode = in.nextInt();
